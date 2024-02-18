@@ -5,12 +5,12 @@ Copyright (c) 2024 @Alone_Dil_bot
 
 import uuid
 import asyncio
-from AarohiX.utils.Databases.feds_db import *
+from DAXXMUSIC.utils.Databases.feds_db import *
 import os
-from AarohiX import app
+from DAXXMUSIC import app
 import config
 #from config import BOT_USERNAME as BOT_ID
-from AarohiX.misc import SUDOERS as SUDO
+from DAXXMUSIC.misc import SUDOERS as SUDO
 from config import LOGGER_ID as LOG_GROUP_ID
 
 
@@ -18,9 +18,9 @@ from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus, ChatType, ParseMode
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from AarohiX.utils.function.fedsfunction import extract_user, extract_user_and_reason
+from DAXXMUSIC.utils.function.fedsfunction import extract_user, extract_user_and_reason
 from pyrogram.errors import FloodWait, PeerIdInvalid
-from AarohiX.utils.errors import capture_err
+from DAXXMUSIC.utils.errors import capture_err
 
 __MODULE__ = "Federation"
 __HELP__ = """
@@ -30,8 +30,8 @@ But then you have many groups, and you don't want this spammer to be in one of y
 You can even designate federation admins, so your trusted admin can ban all the spammers from chats you want to protect.\n\n
 """
 
-BOT_ID = "5791601466"
-SUPPORT_CHAT = "@alonegroup121"
+BOT_ID = "6433037578"
+SUPPORT_CHAT = "https://t.me/+I87poJveZllkN2Y1"
 COMMAND_HANDLER = ("/")
 
 
