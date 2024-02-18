@@ -21,7 +21,7 @@ from telegram.ext import CallbackQueryHandler, CommandHandler, ContextTypes
 from telegram.helpers import mention_html, mention_markdown
 
 import Database.sql.feds_sql as sql
-from Mikobot import (
+from DAXXMUSIC import (
     DRAGONS,
     EVENT_LOGS,
     LOGGER,
@@ -30,15 +30,15 @@ from Mikobot import (
     dispatcher,
     function,
 )
-from Mikobot.plugins.disable import DisableAbleCommandHandler
-from Mikobot.plugins.helper_funcs.alternate import send_message
-from Mikobot.plugins.helper_funcs.chat_status import is_user_admin
-from Mikobot.plugins.helper_funcs.extraction import (
+from DAXXMUSIC.plugins.disable import DisableAbleCommandHandler
+from DAXXMUSIC.plugins.helper_funcs.alternate import send_message
+from DAXXMUSIC.plugins.helper_funcs.chat_status import is_user_admin
+from DAXXMUSIC.plugins.helper_funcs.extraction import (
     extract_unt_fedban,
     extract_user,
     extract_user_fban,
 )
-from Mikobot.plugins.helper_funcs.string_handling import markdown_parser
+from DAXXMUSIC.plugins.helper_funcs.string_handling import markdown_parser
 
 # <=======================================================================================================>
 
