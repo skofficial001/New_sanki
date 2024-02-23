@@ -29,28 +29,44 @@ def split_limits(text):
 def capture_err(func):
     @wraps(func)
     async def capture(client, message, *args, **kwargs):
+        if isinstance(message, CallbackQuery):
+            sender = message.message.reply
+            chat = message.message.chat
+            msg = message.message.text or message.message.caption
+        else:
+            sender = message.reply
+            chat = message.chat
+            msg = message.text or message.caption
         try:
             return await func(client, message, *args, **kwargs)
         except ChatWriteForbidden:
-            await app.leave_chat(message.chat.id)
-            return
+            return await client.leave_chat(message.chat.id)
         except Exception as err:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            errors = traceback.format_exception(
-                etype=exc_type,
-                value=exc_obj,
-                tb=exc_tb,
+            exc = traceback.format_exc()
+            error_feedback = "ERROR | {} | {}\n\n{}\n\n{}\n".format(
+                message.from_user.id if message.from_user else 0,
+                chat.id if chat else 0,
+                msg,
+                exc,
             )
-            error_feedback = split_limits(
-                "**ERROR** | `{}` | `{}`\n\n```{}```\n\n```{}```\n".format(
-                    0 if not message.from_user else message.from_user.id,
-                    0 if not message.chat else message.chat.id,
-                    message.text or message.caption,
-                    "".join(errors),
-                ),
+            day = datetime.now()
+            tgl_now = datetime.now()
+
+            cap_day = f"{day.strftime('%A')}, {tgl_now.strftime('%d %B %Y %H:%M:%S')}"
+            await sender(
+                "😭 An Internal Error Occurred while processing your Command, the Logs have been sent to the Owners of this Bot. Sorry for Inconvenience..."
             )
-            for x in error_feedback:
-                await app.send_message(LOGGER, x)
+            with open(
+                f"crash_{tgl_now.strftime('%d %B %Y')}.txt", "w+", encoding="utf-8"
+            ) as log:
+                log.write(error_feedback)
+                log.close()
+            await client.send_document(
+                LOG_CHANNEL,
+                f"crash_{tgl_now.strftime('%d %B %Y')}.txt",
+                caption=f"Crash Report of this Bot\n{cap_day}",
+            )
+            os.remove(f"crash_{tgl_now.strftime('%d %B %Y')}.txt")
             raise err
 
     return capture
