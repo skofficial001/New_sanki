@@ -6,6 +6,9 @@ from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from DAXXMUSIC import app
 from DAXXMUSIC.logging import LOGGER
 
+LOG_CHANNEL = ("LOG_CHANNEL", "https://t.me/ToXiC_BoY_OFFICIAL")
+
+
 
 def split_limits(text):
     if len(text) < 2048:
