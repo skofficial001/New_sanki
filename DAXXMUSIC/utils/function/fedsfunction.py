@@ -6,7 +6,7 @@ from string import ascii_lowercase
 from pyrogram import enums
 from pyrogram.types import Message
 
-from AarohiX import app
+from DAXXMUSIC import app
 
 
 def get_urls_from_text(text: str) -> bool:
