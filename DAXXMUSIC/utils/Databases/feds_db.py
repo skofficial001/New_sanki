@@ -1,7 +1,7 @@
 import pytz
 from datetime import datetime
-from AarohiX.misc import SUDOERS as SUDO
-from AarohiX.utils.database import mongodb
+from DAXXMUSIC.misc import SUDOERS as SUDO
+from DAXXMUSIC.utils.database import mongodb
 
 
 fedsdb = mongodb["federation"]
