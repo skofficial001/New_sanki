@@ -1,6 +1,6 @@
 from pyrogram import filters
 from pymongo import MongoClient
-from Natasha import app
+from DAXXMUSIC import app
 from config import MONGO_DB
 from pyrogram.types import *
 
@@ -13,7 +13,7 @@ user_data = {}
 
 today = {}
 
-pic = "https://telegra.ph/file/895fb19771f4c6bfc0607.jpg"
+pic = "https://telegra.ph/file/6589d5e41ccaf809453b7.jpg"
 
 
 # ------------------- watcher ----------------------- #
