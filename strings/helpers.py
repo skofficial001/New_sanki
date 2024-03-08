@@ -167,6 +167,9 @@ HELP_18 = """
 <b><u>Tᴀɢ-Aʟʟ :</b></u>
 
  /tagall ᴏʀ @all '(ʀᴇᴘʟʏ ᴛᴏ ᴍᴇssᴀɢᴇ ᴏʀ ᴀᴅᴅ ᴀɴᴏᴛʜᴇʀ ᴍᴇssᴀɢᴇ) ᴛᴏ ᴍᴇɴᴛɪᴏɴ ᴀʟʟ ᴍᴇᴍʙᴇʀs ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ, ᴡɪᴛʜᴏᴜᴛ ᴇxᴄᴇᴘᴛɪᴏɴ.
+ /all or @all reply to message or add other message) to mention all members in your group. 
+ /tagoff you can stop special tag. 
+ /cancel you can stop text mention.
  """
 
 HELP_19 = """
@@ -231,7 +234,7 @@ Admins only:
  ❍ /tmute <userhandle> x(m/h/d): mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
  ❍ /unmute <userhandle>: unmutes a user. Can also be used as a reply, muting the replied to user.
 __
-𝐒ᴘᴇᴄɪᴀʟ 𝐂ᴏᴍᴍᴀɴᴅs 𝐒ᴜᴘᴘᴏʀᴛ 𝐀ʟʟ 𝐄xᴀᴍᴘʟᴇ  - 𝚈𝚞𝚖𝚒 𝚋𝚊𝚗 𝚈𝚞𝚖𝚒 𝚖𝚞𝚝𝚎 𝚈𝚞𝚖𝚒 𝚙𝚛𝚘𝚖𝚘𝚝𝚎 ..... 𝚎𝚝𝚌
+𝐒ᴘᴇᴄɪᴀʟ 𝐂ᴏᴍᴍᴀɴᴅs 𝐒ᴜᴘᴘᴏʀᴛ 𝐀ʟʟ 𝐄xᴀᴍᴘʟᴇ  - 𝚂𝙰𝙽𝙺𝙸 𝚋𝚊𝚗 𝚂𝙰𝙽𝙺𝙸 𝚖𝚞𝚝𝚎 𝚂𝙰𝙽𝙺𝙸 𝚙𝚛𝚘𝚖𝚘𝚝𝚎 ..... 𝚎𝚝𝚌
 """
 HELP_24 = """
 <b><u>Sᴇᴀʀᴄʜ :</b></u>
