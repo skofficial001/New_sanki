@@ -1,10 +1,10 @@
 from pyrogram.types import InlineKeyboardButton
-
 import config
 from DAXXMUSIC import app
 
 
 def start_panel(_):
+    """Generates the start panel with buttons."""
     buttons = [
         [
             InlineKeyboardButton(
@@ -17,6 +17,7 @@ def start_panel(_):
 
 
 def private_panel(_):
+    """Generates the private panel with buttons."""
     buttons = [
         [
             InlineKeyboardButton(
@@ -25,22 +26,28 @@ def private_panel(_):
             )
         ],
         [
-            InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
             InlineKeyboardButton(
-                text=_["S_B_13"],
-                url=f"https://t.me/Aadi29104",
-            )
+                text=_["S_B_4"], callback_data="settings_back_helper"
+            ),
+            InlineKeyboardButton(
+                text=_["S_B_13"], url="https://t.me/Aadi29104"
+            ),
         ],
         [
-            InlineKeyboardButton(text=_["S_B_6"], url=config.SUPPORT_CHANNEL),
-            InlineKeyboardButton(text=_["S_B_10"], url=config.SUPPORT_CHAT),
+            InlineKeyboardButton(
+                text=_["S_B_6"], url=config.SUPPORT_CHANNEL
+            ),
+            InlineKeyboardButton(
+                text=_["S_B_10"], url=config.SUPPORT_CHAT
+            ),
         ],
         [
-            InlineKeyboardButton(text=_["S_B_5"], user_id=config.OWNER_ID),
             InlineKeyboardButton(
-                text=_["S_B_12"],
-                url=f"https://t.me/SANKI_XDX",
-            )
-        ],   
+                text=_["S_B_5"], user_id=config.OWNER_ID
+            ),
+            InlineKeyboardButton(
+                text=_["S_B_12"], url="https://t.me/TSGCODER"
+            ),
+        ],
     ]
     return buttons
