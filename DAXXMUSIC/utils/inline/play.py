@@ -1,125 +1,155 @@
-from typing import Union
-
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+import math
+from pyrogram.types import InlineKeyboardButton
 from DAXXMUSIC import app
+import config
+from DAXXMUSIC.utils.formatters import time_to_seconds
 
 
-def help_pannel(_, START: Union[bool, int] = None):
-    first = [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data=f"close")]
-    second = [
-        InlineKeyboardButton(
-            text=_["BACK_PAGE"],
-            callback_data=f"mbot_cb",
-        ),
-        InlineKeyboardButton(
-            text=_["BACK_BUTTON"],
-            callback_data=f"settingsback_helper",
-        ),
-        InlineKeyboardButton(
-            text=_["NEXT_PAGE"],
-            callback_data=f"mbot_cb",
-        ),
-    ]
-    mark = second if START else first
-    upl = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton(
-                    text=_["H_B_1"],
-                    callback_data="help_callback hb1",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_2"],
-                    callback_data="help_callback hb2",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_3"],
-                    callback_data="help_callback hb3",
-                ),
-            ],
-            [
-                InlineKeyboardButton(
-                    text=_["H_B_4"],
-                    callback_data="help_callback hb4",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_5"],
-                    callback_data="help_callback hb5",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_6"],
-                    callback_data="help_callback hb6",
-                ),
-            ],
-            [
-                InlineKeyboardButton(
-                    text=_["H_B_7"],
-                    callback_data="help_callback hb7",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_8"],
-                    callback_data="help_callback hb8",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_9"],
-                    callback_data="help_callback hb9",
-                ),
-            ],
-            [
-                InlineKeyboardButton(
-                    text=_["H_B_10"],
-                    callback_data="help_callback hb10",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_11"],
-                    callback_data="help_callback hb11",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_12"],
-                    callback_data="help_callback hb12",
-                ),
-            ],
-            [
-                InlineKeyboardButton(
-                    text=_["H_B_13"],
-                    callback_data="help_callback hb13",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_14"],
-                    callback_data="help_callback hb14",
-                ),
-                InlineKeyboardButton(
-                    text=_["H_B_15"],
-                    callback_data="help_callback hb15",
-                ),
-            ],
-            mark,
-        ]
-    )
-    return upl
-
-
-def help_back_markup(_):
-    upl = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton(
-                    text=_["BACK_BUTTON"],
-                    callback_data=f"settings_back_helper",
-                ),
-            ]
-        ]
-    )
-    return upl
-
-
-def private_help_panel(_):
+def track_markup(_, videoid, user_id, channel, fplay):
     buttons = [
         [
             InlineKeyboardButton(
-                text=_["S_B_4"],
-                url=f"https://t.me/{app.username}?start=help",
+                text=_["P_B_1"],
+                callback_data=f"MusicStream {videoid}|{user_id}|a|{channel}|{fplay}",
+            ),
+            InlineKeyboardButton(
+                text=_["P_B_2"],
+                callback_data=f"MusicStream {videoid}|{user_id}|v|{channel}|{fplay}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text=_["CLOSE_BUTTON"],
+                callback_data=f"forceclose {videoid}|{user_id}",
+            )
+        ],
+    ]
+    return buttons
+
+
+def stream_markup_timer(_, chat_id, played, dur):
+    played_sec = time_to_seconds(played)
+    duration_sec = time_to_seconds(dur)
+    percentage = (played_sec / duration_sec) * 100
+    umm = math.floor(percentage)
+    if 0 < umm <= 10:
+        bar = "◉—————————"
+    elif 10 < umm < 20:
+        bar = "—◉————————"
+    elif 20 <= umm < 30:
+        bar = "——◉———————"
+    elif 30 <= umm < 40:
+        bar = "———◉——————"
+    elif 40 <= umm < 50:
+        bar = "————◉—————"
+    elif 50 <= umm < 60:
+        bar = "—————◉————"
+    elif 60 <= umm < 70:
+        bar = "——————◉———"
+    elif 70 <= umm < 80:
+        bar = "———————◉——"
+    elif 80 <= umm < 95:
+        bar = "————————◉—"
+    else:
+        bar = "—————————◉"
+    buttons = [
+                [
+            InlineKeyboardButton(
+                text=f"{played} {bar} {dur}",
+                callback_data="GetTimer",
+            )
+        ],
+        [
+            InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
+            InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
+        ],
+        
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
+    ]
+    return buttons
+
+
+def stream_markup(_, chat_id):
+    buttons = [
+        [
+            InlineKeyboardButton(text="▷", callback_data=f"ADMIN Resume|{chat_id}"),
+            InlineKeyboardButton(text="II", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="▢", callback_data=f"ADMIN Stop|{chat_id}"),
+        ],
+            
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
+    ]
+    return buttons
+
+
+def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text=_["P_B_1"],
+                callback_data=f"SANKIPlaylists {videoid}|{user_id}|{ptype}|a|{channel}|{fplay}",
+            ),
+            InlineKeyboardButton(
+                text=_["P_B_2"],
+                callback_data=f"SANKIPlaylists {videoid}|{user_id}|{ptype}|v|{channel}|{fplay}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text=_["CLOSE_BUTTON"],
+                callback_data=f"forceclose {videoid}|{user_id}",
+            ),
+        ],
+    ]
+    return buttons
+
+
+def livestream_markup(_, videoid, user_id, mode, channel, fplay):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text=_["P_B_3"],
+                callback_data=f"LiveStream {videoid}|{user_id}|{mode}|{channel}|{fplay}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text=_["CLOSE_BUTTON"],
+                callback_data=f"forceclose {videoid}|{user_id}",
+            ),
+        ],
+    ]
+    return buttons
+
+
+def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
+    query = f"{query[:20]}"
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text=_["P_B_1"],
+                callback_data=f"MusicStream {videoid}|{user_id}|a|{channel}|{fplay}",
+            ),
+            InlineKeyboardButton(
+                text=_["P_B_2"],
+                callback_data=f"MusicStream {videoid}|{user_id}|v|{channel}|{fplay}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="◁",
+                callback_data=f"slider B|{query_type}|{query}|{user_id}|{channel}|{fplay}",
+            ),
+            InlineKeyboardButton(
+                text=_["CLOSE_BUTTON"],
+                callback_data=f"forceclose {query}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="▷",
+                callback_data=f"slider F|{query_type}|{query}|{user_id}|{channel}|{fplay}",
             ),
         ],
     ]
